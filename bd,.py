@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from math import log
+from math import log, floor
 
 bd_sid_values = [
 0xdc, 0x02, 0x0a, 0x03,  0x3a, 0x03, 0x6c, 0x03,  0xa0, 0x03, 0xd2, 0x03,  0x12, 0x04, 0x4c, 0x04,
@@ -26,7 +26,7 @@ note_names = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
 
 # https://www.liveabout.com/pitch-notation-and-octave-naming-2701389
 def index_to_name(i):
-	octave = int((i-2)/12)+4
+	octave = floor((i-3)/12)+5
 	name = note_names[i%12]
 	sharp = "" if len(name)==1 else "#"
 	return "{0}{1}{2}".format(name[0], octave, sharp)
