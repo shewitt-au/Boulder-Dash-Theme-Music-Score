@@ -19,7 +19,7 @@ def freq_to_reg_pal(f):
 	return int(f*pal_const+0.5)
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsv_const
+	return reg/ntsc_const
 
 def freq_to_reg_ntsc(f):
 	return int(f*ntsc_const+0.5)
@@ -31,4 +31,6 @@ def freq_to_note(f):
 	return log(f/f0, a)
 
 if __name__=='__main__':
-	print(hex(freq_to_reg_pal(440)))
+	f = 0x1d00
+	print(reg_to_freq_ntsc(f))
+	print(reg_to_freq_pal(f))
