@@ -19,13 +19,17 @@ def chunks():
 	except StopIteration:
 		return
 
-f0 = 435.97705078124994
-a = 2**(1/12)
+a4 = 435.97705078124994
+base = 2**(1/12)
 
 note_names = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
 
+# https://www.liveabout.com/pitch-notation-and-octave-naming-2701389
 def index_to_name(i):
-	return note_names[i%12]+str(int(i/12))
+	octave = int((i-2)/12)+4
+	name = note_names[i%12]
+	sharp = "" if len(name)==1 else "#"
+	return "{0}{1}{2}".format(name[0], octave, sharp)
 
 # http://www.cbmitapages.it/c64/sid1eng.htm
 # https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table
@@ -47,11 +51,12 @@ def freq_to_reg_ntsc(f):
 	return int(f*ntsc_const+0.5)
 
 def note_to_freq(n):
-	return f0*a**n
+	return a4*base**n
 
 def freq_to_note(f):
-	return log(f/f0, a)
+	return log(f/a4, base)
 
 if __name__=='__main__':
 	for v in chunks():
-		print(index_to_name(round(freq_to_note(reg_to_freq_pal(v)))))
+		f = reg_to_freq_pal(v)
+		print(index_to_name(round(freq_to_note(f))), '\t', f)
