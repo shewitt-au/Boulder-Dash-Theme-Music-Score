@@ -22,6 +22,11 @@ def chunks():
 f0 = 435.97705078124994
 a = 2**(1/12)
 
+note_names = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
+
+def index_to_name(i):
+	return note_names[i%12]+str(int(i/12))
+
 # http://www.cbmitapages.it/c64/sid1eng.htm
 # https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table
 # https://csdb.dk/forums/?roomid=11&topicid=124823&firstpost=2
@@ -49,4 +54,4 @@ def freq_to_note(f):
 
 if __name__=='__main__':
 	for v in chunks():
-		print(round(freq_to_note(reg_to_freq_pal(v))))
+		print(index_to_name(round(freq_to_note(reg_to_freq_pal(v)))))
