@@ -33,7 +33,7 @@
 		>>
 		}
 
-	\new Staff = "down" { \clef bass }
+		\new Staff = "down" { \clef bass }
 	>>
 
 	\layout { }
