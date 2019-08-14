@@ -45,7 +45,7 @@ def voice1():
 	try:
 		while True:
 			next(i)
-			yield next(i)-0x14
+			yield next(i)-10
 	except StopIteration:
 		return
 
@@ -53,7 +53,7 @@ def voice2():
 	i = iter(bd_music)
 	try:
 		while True:
-			yield next(i)-0x14
+			yield next(i)-10
 			next(i)
 	except StopIteration:
 		return
@@ -107,7 +107,7 @@ def freq_to_note(f):
 
 if __name__=='__main__':
 	s = ""
-	for n in voice2():
+	for n in voice1():
 		sid = note_to_sid(n)
 		f = reg_to_freq_pal(sid)
 		s += index_to_lily(round(freq_to_note(f)))+" "

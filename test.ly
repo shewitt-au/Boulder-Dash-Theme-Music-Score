@@ -20,7 +20,7 @@
 				\set midiInstrument = #"acoustic guitar (steel)"
 				\autochange
 				{
-					g, b, d g a, c d a ds f g as f e' fs d' g, g d, a, f, a a, f, g, g d, a, ds g' g ds f, f c, g, cs f' f cs d, fs e, g c c c' c g g g g g g g g g g g g g g g g g g g g g g g g g g g g f f f f g g' g f' g e' g d' f f' f f' f c' f f' g g g g g g g g g g g g f f f f b g d b, a f c f, b g d b, a f c f,
+					f a c' f' g as c' g' cs' ds' f' gs' ds' d'' e' c'' f f' c g ds g' g ds f f' c g cs' f'' f' cs' ds ds' as, f b ds'' ds' b c e' d f' as as as' as f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' f' ds' ds' ds' ds' f' f'' f' ds'' f' d'' f' c'' ds' ds'' ds' ds'' ds' as' ds' ds'' f' f' f' f' f' f' f' f' f' f' f' f' ds' ds' ds' ds' a' f' c' a g' ds' as ds a' f' c' a g' ds' as ds 
 				}
 			}
 
@@ -30,7 +30,7 @@
 				\set midiInstrument = #"electric guitar (jazz)"
 				\autochange
 				{
-					g,, d, g, as, f,, e, f, c e'' e'' ds, e'' f, c' fs, as g,, g,, g,, g,, f,, f,, f,, f,, g,, g,, g,, g,, ds, ds, ds, ds, f,, f,, f,, f,, cs, cs, cs, cs, ds'' d ds'' d cs'' cs'' g,, g,, g,, g,, g,, g,, g, g, g,, g,, f,, f,, f,, f,, f, f, f,, f,, g,, b g,, c' g, b g,, c' f,, b f,, c' f, a f,, as g,, g,, g,, d' g, g, g,, as f,, f,, f,, f,, f, f, f,, f,, g,, b g,, c' g, b g,, c' f,, b f,, c' f, a f,, as g d b, g, f c a, f,, d' b g d c a, f, f,,
+					f, c f gs ds, d ds as cs, cs, cs cs, ds as' e gs' f, f, f, f, ds, ds, ds, ds, f, f, f, f, cs cs cs cs ds, ds, ds, ds, b, b, b, b, c, c' c, c' as,, as,, f, f, f, f, f, f, f f f, f, ds, ds, ds, ds, ds ds ds, ds, f, a' f, as' f a' f, as' ds, a' ds, as' ds g' ds, gs' f, f, f, c'' f f f, gs' ds, ds, ds, ds, ds ds ds, ds, f, a' f, as' f a' f, as' ds, a' ds, as' ds g' ds, gs' f' c' a f ds' as g ds, c'' a' f' c' as g ds ds, 
 				}
 			}
 		>>
