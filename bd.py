@@ -31,6 +31,16 @@ def index_to_name(i):
 	sharp = "" if len(name)==1 else "#"
 	return "{0}{1}{2}".format(name[0], octave, sharp)
 
+def index_to_lily(i):
+	octave = floor((i-3)/12)+2
+	if octave<0:
+		octave = ','*-octave
+	else:
+		octave = "'"*octave
+	name = note_names[i%12]
+	sharp = "" if len(name)==1 else "s"
+	return "{0}{1}{2}".format(name[0], sharp, octave)
+
 # http://www.cbmitapages.it/c64/sid1eng.htm
 # https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table
 # https://csdb.dk/forums/?roomid=11&topicid=124823&firstpost=2
@@ -57,6 +67,8 @@ def freq_to_note(f):
 	return log(f/a4, base)
 
 if __name__=='__main__':
+	s = ""
 	for v in chunks():
 		f = reg_to_freq_pal(v)
-		print(index_to_name(round(freq_to_note(f))), '\t', f)
+		s += index_to_lily(round(freq_to_note(f)))+" "
+	print(s)
