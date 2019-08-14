@@ -16,7 +16,7 @@
 				\new Voice = "voice1"
 				{
 					\voiceOne
-					\tempo 4 = 180
+					\tempo 4 = 190
 					\set midiInstrument = #"acoustic guitar (steel)"
 					\autochange
 					{
