@@ -3,7 +3,7 @@
 \header {
   title = "Boulder Dash (C64)"
   composer = "Peter Liepa"
-  subtitle  = "Transcribed by Stephen Hewitt"
+  arranger = "Transcribed by Stephen Hewitt"
   tagline = "" % removed
 }
 
