@@ -1,14 +1,17 @@
 \version "2.16.0"
 
-\header { 
-  tagline = ""  % removed 
+\header {
+  title = "Boulder Dash (C64)"
+  composer = "Peter Liepa"
+  subtitle  = "Transcribed by Stephen Hewitt"
+  tagline = "" % removed
 }
 
 \language english
 
 \score
 {
-	\new PianoStaff
+	\new PianoStaff \with { instrumentName = "SID chip" }
 	<<
 		\new Staff = "up"
 		{
