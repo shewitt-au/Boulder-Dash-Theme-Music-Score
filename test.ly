@@ -16,7 +16,7 @@
 				\new Voice = "voice1"
 				{
 					\voiceOne
-					\key f \minor
+					\key c \major
 					\tempo 4 = 190
 					\set midiInstrument = #"acoustic guitar (steel)"
 					\autochange
@@ -28,7 +28,7 @@
 				\new Voice = "voice2"
 				{
 					\voiceTwo
-					\key f \minor
+					\key c \major
 					\set midiInstrument = #"electric guitar (jazz)"
 					\autochange
 					{
@@ -42,7 +42,7 @@
 		\new Staff = "down"
 		{
 			\clef bass
-			\key f \minor
+			\key c \major
 		}
 	>>
 
