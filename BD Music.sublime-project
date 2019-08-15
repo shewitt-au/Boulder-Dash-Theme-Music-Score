@@ -5,5 +5,13 @@
 			"path": ".",
 			"file_exclude_patterns": ["*.pdf", "*.mid"]
 		}
-	]
+	],
+"build_systems":
+    [
+        {
+        	"name": "LilyPond",
+        	"file_patterns": "*.ly",
+            "shell_cmd": "lilypond \"$file\" && $file_base_name.pdf"
+        }
+    ]
 }
