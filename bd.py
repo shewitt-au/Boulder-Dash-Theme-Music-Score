@@ -120,16 +120,15 @@ if __name__=='__main__':
 		for n in voice1():
 			sid = note_to_sid(n)
 			f = reg_to_freq_pal(sid)
-			v1 += index_to_lily(round(freq_to_note(f)), True)+" "
+			v1 += index_to_lily(round(freq_to_note(f)), True)+"8 "
 		v2 = ""
 		for n in voice2():
 			sid = note_to_sid(n)
 			f = reg_to_freq_pal(sid)
-			v2 += index_to_lily(round(freq_to_note(f)), True)+" "
+			v2 += index_to_lily(round(freq_to_note(f)), True)+"8 "
 
 		env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
 		env.globals['voice1'] = v1
 		env.globals['voice2'] = v2
 		s = render(env, 'bd.ly')
 		of.write(s)
-	
