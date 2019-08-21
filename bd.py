@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from math import log, floor
+import jinja2
 
 bd_sid_values = [
 0xdc, 0x02, 0x0a, 0x03,  0x3a, 0x03, 0x6c, 0x03,  0xa0, 0x03, 0xd2, 0x03,  0x12, 0x04, 0x4c, 0x04,
@@ -109,10 +110,26 @@ def note_to_freq(n):
 def freq_to_note(f):
 	return log(f/a4, base)
 
+def render(env, template_name, **template_vars):
+    template = env.get_template(template_name)
+    return template.render(**template_vars)
+
 if __name__=='__main__':
-	s = ""
-	for n in voice1():
-		sid = note_to_sid(n)
-		f = reg_to_freq_pal(sid)
-		s += index_to_lily(round(freq_to_note(f)), True)+" "
-	print(s)
+	with open("test.ly", "w", encoding='utf-8') as of:
+		v1 = ""
+		for n in voice1():
+			sid = note_to_sid(n)
+			f = reg_to_freq_pal(sid)
+			v1 += index_to_lily(round(freq_to_note(f)), True)+" "
+		v2 = ""
+		for n in voice2():
+			sid = note_to_sid(n)
+			f = reg_to_freq_pal(sid)
+			v2 += index_to_lily(round(freq_to_note(f)), True)+" "
+
+		env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
+		env.globals['voice1'] = v1
+		env.globals['voice2'] = v2
+		s = render(env, 'bd.ly')
+		of.write(s)
+	
