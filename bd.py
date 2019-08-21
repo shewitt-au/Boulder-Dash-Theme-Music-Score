@@ -61,24 +61,28 @@ def voice2():
 a4 = 435.97705078124994
 base = 2**(1/12)
 
-note_names = ['a', 'a#', 'b', 'c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#']
+names_sharp = ['a{}',  'a{}♯', 'b{}', 'c{}',  'c{}♯', 'd{}',
+			   'd{}♯', 'e{}',  'f{}', 'f{}♯', 'g{}',  'g{}♯']
+names_flat  = ['a{}',  'b{}♭', 'b{}', 'c{}',  'd{}♭', 'd{}',
+			   'e{}♭', 'e{}',  'f{}', 'g{}♭', 'g{}',  'a♭{}']
 
 # https://www.liveabout.com/pitch-notation-and-octave-naming-2701389
-def index_to_name(i):
+def index_to_name(i, sharp):
 	octave = floor((i-3)/12)+5
-	name = note_names[i%12]
-	sharp = "" if len(name)==1 else "#"
-	return "{0}{1}{2}".format(name[0], octave, sharp)
+	names = names_sharp if sharp else names_flat
+	return names[i%12].format(octave)
 
-def index_to_lily(i):
+lilynames_sharp = ['a', 'as', 'b', 'c', 'cs', 'd', 'ds', 'e','f', 'fs', 'g', 'gs']
+lilynames_flat  = ['a', 'bf', 'b', 'c', 'df', 'd', 'ef', 'e','f', 'gf', 'g', 'af']
+
+def index_to_lily(i, sharp):
+	names = lilynames_sharp if sharp else lilynames_flat
 	octave = floor((i-3)/12)+2
 	if octave<0:
 		octave = ','*-octave
 	else:
 		octave = "'"*octave
-	name = note_names[i%12]
-	sharp = "" if len(name)==1 else "s"
-	return "{0}{1}{2}".format(name[0], sharp, octave)
+	return names[i%12]+octave
 
 # http://www.cbmitapages.it/c64/sid1eng.htm
 # https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table
@@ -110,5 +114,5 @@ if __name__=='__main__':
 	for n in voice1():
 		sid = note_to_sid(n)
 		f = reg_to_freq_pal(sid)
-		s += index_to_lily(round(freq_to_note(f)))+" "
+		s += index_to_lily(round(freq_to_note(f)), True)+" "
 	print(s)
