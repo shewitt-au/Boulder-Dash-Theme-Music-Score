@@ -114,21 +114,68 @@ def render(env, template_name, **template_vars):
     template = env.get_template(template_name)
     return template.render(**template_vars)
 
+names = ['a', 'a♯', 'b', 'c', 'c♯', 'd', 'd♯', 'e', 'f', 'f♯', 'g', 'g♯']
+
+class Spectrum(object):
+	def __init__(self):
+		self.notes = [0]*12
+
+	def add(self, n):
+		self.notes[n%12] += 1
+
+	def __str__(self):
+		s = ""
+		for i in range(0, 12):
+			s += names[i].ljust(2)+" : "+str(self.notes[i])+"\n"
+		return s
+
+class Keys(object):
+	def __init__(self):
+		maj = [0, 2, 2, 1, 2, 2, 2]
+		self.keys = {}
+		for t in range(0, 12):
+			s = []
+			last = t
+			for i in maj:
+				s.append((last+i)%12)
+				last += i
+			self.keys[t] = s
+
+	def notes_in(self, k):
+		return [n for n in range(0, 12) if n in self.keys[k]]
+
+	def notes_not_in(self, k):
+		return [n for n in range(0, 12) if n not in self.keys[k]]
+
 if __name__=='__main__':
 	with open("test.ly", "w", encoding='utf-8') as of:
+		s = Spectrum()
+
 		v1 = ""
 		for n in voice1():
 			sid = note_to_sid(n)
 			f = reg_to_freq_pal(sid)
-			v1 += index_to_lily(round(freq_to_note(f)), True)+"8 "
+			i = round(freq_to_note(f))
+			s.add(i)
+			v1 += index_to_lily(i, False)+"8 "
 		v2 = ""
 		for n in voice2():
 			sid = note_to_sid(n)
 			f = reg_to_freq_pal(sid)
-			v2 += index_to_lily(round(freq_to_note(f)), True)+"8 "
+			i = round(freq_to_note(f))
+			s.add(i)
+			v2 += index_to_lily(i, False)+"8 "
+
+		keys = Keys()
+		for k in range(0, 12):
+			acc = 0
+			for nkn in keys.notes_not_in(k):
+				acc += s.notes[nkn]
+			print(names[k].ljust(2)+" : "+str(acc))
 
 		env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
 		env.globals['voice1'] = v1
 		env.globals['voice2'] = v2
+		env.globals['key'] = r"\key f \minor"
 		s = render(env, 'bd.ly')
 		of.write(s)
