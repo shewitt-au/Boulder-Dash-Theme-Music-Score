@@ -20,7 +20,7 @@
 				{
 					\voiceOne
 					{{key}}
-					\tempo 4 = 185
+					{{tempo}}
 					\set midiInstrument = #"acoustic guitar (steel)"
 					\autochange
 					\repeat volta 2

@@ -177,5 +177,6 @@ if __name__=='__main__':
 		env.globals['voice1'] = v1
 		env.globals['voice2'] = v2
 		env.globals['key'] = r"\key f \minor"
+		env.globals['tempo'] = r"\tempo 4 = 188"
 		s = render(env, 'bd.ly')
 		of.write(s)
