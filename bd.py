@@ -142,7 +142,7 @@ class Keys(object):
 			self.keys[t] = s
 
 	def notes_in(self, k):
-		return [n for n in range(0, 12) if n in self.keys[k]]
+		return self.keys[k]
 
 	def notes_not_in(self, k):
 		return [n for n in range(0, 12) if n not in self.keys[k]]
@@ -171,7 +171,7 @@ if __name__=='__main__':
 			acc = 0
 			for nkn in keys.notes_not_in(k):
 				acc += s.notes[nkn]
-			print(names[k].ljust(2)+" : "+str(acc))
+			print(names[k].ljust(2)+" : "+str(acc))`
 
 		env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
 		env.globals['voice1'] = v1
