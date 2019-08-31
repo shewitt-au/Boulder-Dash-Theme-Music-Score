@@ -46,7 +46,7 @@ def voice1():
 	try:
 		while True:
 			next(i)
-			yield next(i)-10
+			yield next(i)
 	except StopIteration:
 		return
 
@@ -54,7 +54,7 @@ def voice2():
 	i = iter(bd_music)
 	try:
 		while True:
-			yield next(i)-10
+			yield next(i)
 			next(i)
 	except StopIteration:
 		return
@@ -153,25 +153,27 @@ if __name__=='__main__':
 
 		v1 = ""
 		for n in voice1():
-			sid = note_to_sid(n)
+			sid = note_to_sid(n-10)
 			f = reg_to_freq_pal(sid)
 			i = round(freq_to_note(f))
 			s.add(i)
 			v1 += index_to_lily(i, False)+"8 "
+
 		v2 = ""
 		for n in voice2():
-			sid = note_to_sid(n)
+			sid = note_to_sid(n-10)
 			f = reg_to_freq_pal(sid)
 			i = round(freq_to_note(f))
 			s.add(i)
 			v2 += index_to_lily(i, False)+"8 "
+			print(hex(n), hex(sid), f, i, index_to_name(i, True), index_to_lily(i, False))
 
 		keys = Keys()
 		for k in range(0, 12):
 			acc = 0
 			for nkn in keys.notes_not_in(k):
 				acc += s.notes[nkn]
-			print(names[k].ljust(2)+" : "+str(acc))`
+			print(names[k].ljust(2)+" : "+str(acc))
 
 		env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
 		env.globals['voice1'] = v1
@@ -180,3 +182,5 @@ if __name__=='__main__':
 		env.globals['tempo'] = r"\tempo 4 = 188"
 		s = render(env, 'bd.ly')
 		of.write(s)
+
+#print(index_to_name(round(freq_to_note(reg_to_freq_pal(0x5b8))), True))
