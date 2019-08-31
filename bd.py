@@ -180,5 +180,3 @@ if __name__=='__main__':
 		env.globals['tempo'] = r"\tempo 4 = 188"
 		s = render(env, 'bd.ly')
 		of.write(s)
-
-#print(index_to_name(round(freq_to_note(reg_to_freq_pal(0x5b8))), True))
