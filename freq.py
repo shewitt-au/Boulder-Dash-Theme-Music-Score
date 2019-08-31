@@ -11,7 +11,7 @@ bd_sid_values = [
 0x00, 0x1d, 0x90, 0x1e,  0x90, 0x20, 0x60, 0x22,  0x90, 0x24, 0xb0, 0x26,  0x00, 0x29, 0x70, 0x2b,
 0xc0, 0x2d]
 
-def chunks():
+def sid_frequencies():
 	i = iter(bd_sid_values)
 	try:
 		while True:
@@ -32,6 +32,6 @@ def cents_from(f, ref):
 	return 1200*log(f/ref, 2)
 
 print("PAL\n---")
-for f in chunks():
+for f in sid_frequencies():
 	f = reg_to_freq_pal(f)
 	print(f, round(cents_from(f, 435)))
