@@ -46,7 +46,7 @@ def voice1():
 	try:
 		while True:
 			next(i)
-			yield next(i)
+			yield next(i)-10
 	except StopIteration:
 		return
 
@@ -54,7 +54,7 @@ def voice2():
 	i = iter(bd_music)
 	try:
 		while True:
-			yield next(i)
+			yield next(i)-10
 			next(i)
 	except StopIteration:
 		return
@@ -153,20 +153,18 @@ if __name__=='__main__':
 
 		v1 = ""
 		for n in voice1():
-			sid = note_to_sid(n-10)
+			sid = note_to_sid(n)
 			f = reg_to_freq_pal(sid)
 			i = round(freq_to_note(f))
 			s.add(i)
 			v1 += index_to_lily(i, False)+"8 "
-
 		v2 = ""
 		for n in voice2():
-			sid = note_to_sid(n-10)
+			sid = note_to_sid(n)
 			f = reg_to_freq_pal(sid)
 			i = round(freq_to_note(f))
 			s.add(i)
 			v2 += index_to_lily(i, False)+"8 "
-			print(hex(n), hex(sid), f, i, index_to_name(i, True), index_to_lily(i, False))
 
 		keys = Keys()
 		for k in range(0, 12):
