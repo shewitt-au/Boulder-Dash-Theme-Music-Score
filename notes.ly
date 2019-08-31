@@ -4,6 +4,8 @@
   tagline = "" % removed
 }
 
+\paper { indent = 0\cm } 
+
 \language english
 
 \score
