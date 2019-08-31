@@ -4,7 +4,11 @@
   tagline = "" % removed
 }
 
-\paper { indent = 0\cm } 
+\paper
+{
+	indent = 0\cm
+	paper-height = 90\mm
+}
 
 \language english
 
