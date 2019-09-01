@@ -34,4 +34,4 @@ def cents_from(f, ref):
 print("PAL\n---")
 for f in sid_frequencies():
     f = reg_to_freq_pal(f)
-    print(f, round(cents_from(f, 435)))
+    print(reg_to_freq_pal(f))
