@@ -59,9 +59,6 @@ def voice2():
     except StopIteration:
         return
 
-a4 = 435.97705078124994
-base = 2**(1/12)
-
 names_sharp = ['a{}',  'a{}♯', 'b{}', 'c{}',  'c{}♯', 'd{}',
                'd{}♯', 'e{}',  'f{}', 'f{}♯', 'g{}',  'g{}♯']
 names_flat  = ['a{}',  'b{}♭', 'b{}', 'c{}',  'd{}♭', 'd{}',
@@ -91,6 +88,9 @@ def index_to_lily(i, sharp):
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
+
+a4 = 435.97705078124994
+base = 2**(1/12)
 
 def reg_to_freq_pal(reg):
     return reg/pal_const
