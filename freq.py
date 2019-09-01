@@ -12,26 +12,26 @@ bd_sid_values = [
 0xc0, 0x2d]
 
 def sid_frequencies():
-	i = iter(bd_sid_values)
-	try:
-		while True:
-			yield next(i)+next(i)*256
-	except StopIteration:
-		return
+    i = iter(bd_sid_values)
+    try:
+        while True:
+            yield next(i)+next(i)*256
+    except StopIteration:
+        return
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
 
 def reg_to_freq_pal(reg):
-	return reg/pal_const
+    return reg/pal_const
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsc_const
+    return reg/ntsc_const
 
 def cents_from(f, ref):
-	return 1200*log(f/ref, 2)
+    return 1200*log(f/ref, 2)
 
 print("PAL\n---")
 for f in sid_frequencies():
-	f = reg_to_freq_pal(f)
-	print(f, round(cents_from(f, 435)))
+    f = reg_to_freq_pal(f)
+    print(f, round(cents_from(f, 435)))

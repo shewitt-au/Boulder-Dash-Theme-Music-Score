@@ -12,23 +12,23 @@ bd_sid_values = [
 0xc0, 0x2d]
 
 def sid_frequencies():
-	i = iter(bd_sid_values)
-	try:
-		while True:
-			yield next(i)+next(i)*256
-	except StopIteration:
-		return
+    i = iter(bd_sid_values)
+    try:
+        while True:
+            yield next(i)+next(i)*256
+    except StopIteration:
+        return
 
 def note_to_sid(n):
-	return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
+    return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
 
 names_sharp=['a{}','a{}♯','b{}','c{}','c{}♯','d{}','d{}♯','e{}','f{}','f{}♯','g{}','g{}♯']
 names_flat=['a{}','b{}♭','b{}','c{}','d{}♭','d{}','e{}♭','e{}','f{}','g{}♭','g{}','a♭{}']
 
 def index_to_name(i, sharp):
-	octave = floor((i-3)/12)+5
-	names = names_sharp if sharp else names_flat
-	return names[i%12].format(octave)
+    octave = floor((i-3)/12)+5
+    names = names_sharp if sharp else names_flat
+    return names[i%12].format(octave)
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
@@ -36,18 +36,18 @@ a4 = 435.97705078124994
 base = 2**(1/12)
 
 def reg_to_freq_pal(reg):
-	return reg/pal_const
+    return reg/pal_const
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsc_const
+    return reg/ntsc_const
 
 def freq_to_note(f):
-	return log(f/a4, base)
+    return log(f/a4, base)
 
 bd_val = 0x0a
 for sid in sid_frequencies():
-	freq = reg_to_freq_pal(sid)
-	idx = round(freq_to_note(freq))
-	print("${:02x} : {}".format(bd_val, index_to_name(idx, True)))
-	bd_val += 1
+    freq = reg_to_freq_pal(sid)
+    idx = round(freq_to_note(freq))
+    print("${:02x} : {}".format(bd_val, index_to_name(idx, True)))
+    bd_val += 1
 print()
