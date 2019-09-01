@@ -12,23 +12,23 @@ bd_sid_values = [
 0xc0, 0x2d]
 
 def sid_frequencies():
-	i = iter(bd_sid_values)
-	try:
-		while True:
-			yield next(i)+next(i)*256
-	except StopIteration:
-		return
+    i = iter(bd_sid_values)
+    try:
+        while True:
+            yield next(i)+next(i)*256
+    except StopIteration:
+        return
 
 def note_to_sid(n):
-	return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
+    return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
 
 names_sharp=['a{}','a{}♯','b{}','c{}','c{}♯','d{}','d{}♯','e{}','f{}','f{}♯','g{}','g{}♯']
 names_flat=['a{}','b{}♭','b{}','c{}','d{}♭','d{}','e{}♭','e{}','f{}','g{}♭','g{}','a♭{}']
 
 def index_to_name(i, sharp):
-	octave = floor((i-3)/12)+5
-	names = names_sharp if sharp else names_flat
-	return names[i%12].format(octave)
+    octave = floor((i-3)/12)+5
+    names = names_sharp if sharp else names_flat
+    return names[i%12].format(octave)
 
 bd_music = [
 0x16, 0x22, 0x1d, 0x26,  0x22, 0x29, 0x25, 0x2e,  0x14, 0x24, 0x1f, 0x27,  0x20, 0x29, 0x27, 0x30,
@@ -49,22 +49,22 @@ bd_music = [
 0x35, 0x32, 0x32, 0x2e,  0x2e, 0x29, 0x29, 0x26,  0x27, 0x30, 0x24, 0x2c,  0x20, 0x27, 0x14, 0x20]
 
 def voice1():
-	i = iter(bd_music)
-	try:
-		while True:
-			next(i)
-			yield next(i)-10
-	except StopIteration:
-		return
+    i = iter(bd_music)
+    try:
+        while True:
+            next(i)
+            yield next(i)-10
+    except StopIteration:
+        return
 
 def voice2():
-	i = iter(bd_music)
-	try:
-		while True:
-			yield next(i)-10
-			next(i)
-	except StopIteration:
-		return
+    i = iter(bd_music)
+    try:
+        while True:
+            yield next(i)-10
+            next(i)
+    except StopIteration:
+        return
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
@@ -72,27 +72,27 @@ a4 = 435.97705078124994
 base = 2**(1/12)
 
 def reg_to_freq_pal(reg):
-	return reg/pal_const
+    return reg/pal_const
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsc_const
+    return reg/ntsc_const
 
 def freq_to_note(f):
-	return log(f/a4, base)
+    return log(f/a4, base)
 
 v1 = ""
 for n in voice1():
-	sid = note_to_sid(n)
-	f = reg_to_freq_pal(sid)
-	i = round(freq_to_note(f))
-	v1 += index_to_name(i, True)+" "
+    sid = note_to_sid(n)
+    f = reg_to_freq_pal(sid)
+    i = round(freq_to_note(f))
+    v1 += index_to_name(i, True)+" "
 
 v2 = ""
 for n in voice2():
-	sid = note_to_sid(n)
-	f = reg_to_freq_pal(sid)
-	i = round(freq_to_note(f))
-	v2 += index_to_name(i, True)+" "
+    sid = note_to_sid(n)
+    f = reg_to_freq_pal(sid)
+    i = round(freq_to_note(f))
+    v2 += index_to_name(i, True)+" "
 
 print("Voice 1")
 print("-------")
