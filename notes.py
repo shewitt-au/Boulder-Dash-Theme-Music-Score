@@ -21,22 +21,14 @@ def render(env, template_name, **template_vars):
 
 if __name__=='__main__':
     with open("notes.ly", "w", encoding='utf-8') as of:
+        notes = ""
         left_hand = ""
-        right_hand = ""
         note = -40
         for bd_val in range(0x0a, 0x3b):
-            if note<-9:
-                left_hand += "{}^\"${:02x}\" ".format(index_to_lily(note, True), bd_val)
-                right_hand += "r4 "
-            else:
-                right_hand += "{}^\"${:02x}\" ".format(index_to_lily(note, True), bd_val)
-                left_hand += "r4 "
+            notes += "{}^\"${:02x}\" ".format(index_to_lily(note, True), bd_val)
             note += 1
-        left_hand += "r4 r4 r4"
-        right_hand += "r4 r4 r4"
 
         env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
-        env.globals['left_hand'] = left_hand
-        env.globals['right_hand'] = right_hand
+        env.globals['notes'] = notes
         s = render(env, 'notes_template.ly')
         of.write(s)

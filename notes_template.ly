@@ -12,23 +12,11 @@
 
 \language english
 
-upper =
-{
-  \clef treble
-  {{right_hand}}
-}
-
-lower =
-{
-  \clef bass
-  {{left_hand}}
-}
-
 \score
 {
 	\new PianoStaff
-	<<
-		\new Staff = "upper" \upper
-		\new Staff = "lower" \lower
-	>>
+	\autochange
+	{
+		{{notes}}
+	}
 }
