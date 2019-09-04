@@ -159,12 +159,17 @@ if __name__=='__main__':
             s.add(i)
             v1 += index_to_lily(i, False)+"8 "
         v2 = ""
+        last_note = 0
         for n in voice2():
             sid = note_to_sid(n)
             f = reg_to_freq_pal(sid)
             i = round(freq_to_note(f))
             s.add(i)
-            v2 += index_to_lily(i, False)+"8 "
+            if i==last_note:
+                v2 += "~"
+            v2 += " "
+            v2 += index_to_lily(i, False)+"8"
+            last_note = i
 
         keys = Keys()
         for k in range(0, 12):
