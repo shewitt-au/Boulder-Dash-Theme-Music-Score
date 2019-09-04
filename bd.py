@@ -148,7 +148,7 @@ class Keys(object):
         return [n for n in range(0, 12) if n not in self.keys[k]]
 
 if __name__=='__main__':
-    with open("test.ly", "w", encoding='utf-8') as of:
+    with open("Boulder_Dash.ly", "w", encoding='utf-8') as of:
         s = Spectrum()
 
         v1 = ""
